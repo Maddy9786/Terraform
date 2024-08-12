@@ -12,6 +12,6 @@ provider "github" {
 }
 
 resource "github_repository" "example" {
-  name        = "My_first_github_repo_using tf"
+  name        = "My_first_github_repo_using_tf"
   visibility = "private"
 }
