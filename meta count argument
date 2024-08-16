@@ -1,0 +1,51 @@
+# In main file
+
+terraform {
+  required_providers {
+    aws = {
+      source  = "hashicorp/aws"
+      version = "5.62.0"
+    }
+  }
+}
+provider "aws" {
+  region = var.aws-region
+}
+
+resource "aws_instance" "server" {
+  ami           = var.ami-id
+  instance_type = var.instance-type
+  count         = var.aws-instance-count
+
+  tags = {
+    name = "ec2inst - ${count.index}"
+  }
+}
+
+/*
+resource "aws_instance" "ec2inst-2" {
+  ami           = var.ami-id
+  instance_type = var.instance-type
+}
+
+In variable.tf
+
+variable "aws-region" {
+  description = "This is my aws region-1"
+  default     = "ap-south-1"
+}
+
+variable "ami-id" {
+  description = "This is my aws ami id"
+  default     = "ami-0a4408457f9a03be3"
+}
+
+variable "instance-type" {
+  default = "t2.micro"
+}
+
+variable "aws-instance-count" {
+  default = 2
+}
+
+*/
